@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>soundcloud</title>
+</head>
+<body>
+  <script>
+var audio = new Audio()
+var ctx = new window.AudioContext()
+
+var uri = 'https://api.soundcloud.com/tracks/63121479/stream?client_id=b95f61a90da961736c03f659c03cb0cc'
+
+audio.crossorigin = 'Anonymous'
+audio.src = uri
+audio.addEventListener('canplay', function() {
+  console.log("Playing")
+  audio.play()
+
+  //Uncomment and sound plays
+  var source = ctx.createMediaElementSource(audio)
+  source.connect(ctx.destination)
+})
+  </script>
+</body>
+</html>
