@@ -5,22 +5,25 @@
   <title>soundcloud</title>
 </head>
 <body>
+  <input type="button" id="button" hidden="true" value="Click to test">
   <script>
-var audio = new Audio()
-var ctx = new window.AudioContext()
+  var audio = new Audio()
+  var uri = 'https://api.soundcloud.com/tracks/63121479/stream?client_id=b95f61a90da961736c03f659c03cb0cc'
+  var button = document.querySelector('#button')
 
-var uri = 'https://api.soundcloud.com/tracks/63121479/stream?client_id=b95f61a90da961736c03f659c03cb0cc'
-
-audio.crossorigin = 'Anonymous'
-audio.src = uri
-audio.addEventListener('canplay', function() {
-  console.log("Playing")
-  audio.play()
-
-  //Uncomment and sound plays
-  var source = ctx.createMediaElementSource(audio)
-  source.connect(ctx.destination)
-})
+  audio.crossorigin = 'Anonymous'
+  audio.src = uri
+  audio.addEventListener('canplay', function() {
+    console.log("Playing")
+    audio.play()
+    button.hidden = false
+  })
+  
+  button.addEventListener('click', function() {
+    var ctx = new window.AudioContext()
+    var source = ctx.createMediaElementSource(audio)
+    source.connect(ctx.destination)
+  })
   </script>
 </body>
 </html>
