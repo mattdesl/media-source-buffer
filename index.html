@@ -15,7 +15,7 @@
 
   <body>
     <h1>createMediaElementSource example</h1>
-    <audio>  
+    <audio preload="auto">  
       <source src="viper.ogg" type="audio/ogg">
       <source src="viper.mp3" type="audio/mp3">   
       <p>Browser too old to support HTML5 audio? How depressing!</p>
@@ -28,10 +28,14 @@
   var pre = document.querySelector('pre');
   var myScript = document.querySelector('script');
 
-  myAudio.addEventListener('canplay', function() {
+  function ready() {
     console.log("Got play event")
     myAudio.play()
-  })
+  }
+  myAudio.addEventListener('canplay', ready)
+  if (myAudio.readyState > 3) {
+    ready()
+  }
 
   // Create a MediaElementAudioSourceNode
   // Feed the HTMLMediaElement into it
